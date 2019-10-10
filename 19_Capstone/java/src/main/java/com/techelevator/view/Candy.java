@@ -1,21 +1,25 @@
 package com.techelevator.view;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Candy implements Inventory {
-	public String getMessage() {
-		return null;
-	}
 
 	private int name;
 	private double price;
 
+	public String "Moonpie" = candy1;
+		
+	
+	
 	public Candy(String name, double price) {
 
 	}
 	
 	@Override
 	public String getMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Munch Munch, Yum!";
 	}
 
 }
