@@ -17,10 +17,11 @@ public class VendingMachineCLI {
 	public void run() {
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-
+				System.out.println("I am in the display vending machines section.");
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
+				System.out.println("I am in the purchase section.");
 				// do purchase
 			}
 		}
