@@ -1,24 +1,18 @@
 package com.techelevator.view;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Beverages implements Inventory {
 	
-	Map <String, String> hm = new HashMap<String, String>() {
-		put("A1", "Potato Crisps $3.05");
-	}
-	
+	 public static void main(String[] args) throws IOException {
+		 int bevList = 4;
+		 ArrayList<Integer> beverageList = new ArrayList<Integer>(bevList);
+	 }
 	public String getMessage() {	
 		return "Glug Glug, Yum";
 	}
-
-	@Override
-	public String getMessage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }
 
 
