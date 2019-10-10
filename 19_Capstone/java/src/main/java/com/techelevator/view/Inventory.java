@@ -4,4 +4,6 @@ public interface Inventory {
 	
 	public String getMessage();
 
+	public String getMessage();
+	
 }

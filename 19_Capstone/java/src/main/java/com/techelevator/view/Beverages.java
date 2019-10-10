@@ -13,6 +13,12 @@ public abstract class Beverages implements Inventory {
 		return "Glug Glug, Yum";
 	}
 
+	@Override
+	public String getMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
 

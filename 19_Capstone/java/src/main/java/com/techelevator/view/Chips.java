@@ -5,4 +5,10 @@ public class Chips implements Inventory {
 		return null;
 	}
 
+	@Override
+	public String getMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
