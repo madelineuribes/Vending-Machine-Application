@@ -7,18 +7,9 @@ import java.util.Scanner;
 
 public class DisplayItems {
 
-	public static void main(String[] args) throws FileNotFoundException {
-
-		Integer productAmount = 5;
-		
-		File inputFile = new File("vendingmachine.csv");
-//		File newFile = new File("updatedvendingmachine.csv");
-//		PrintWriter pw = new PrintWriter(inputFile.getAbsoluteFile());
-
-//		PrintWriter pw = null;
+	public static void getDisplay (File inputFile) throws FileNotFoundException {
 		
 		if (inputFile.exists()) {
-//			pw = new PrintWriter(inputFile.getAbsoluteFile());
 			System.out.println("File found.");
 		}
 
@@ -27,18 +18,13 @@ public class DisplayItems {
 			while (inputScanner.hasNextLine()) {
 				String lineInput = inputScanner.nextLine();
 				String [] lineData = lineInput.split("\\|");
-//				pw.append("|5");
-//				pw.flush();
-//				pw.close();
 				String slot = lineData[0];
 				String productName = lineData[1];
 				String price = lineData[2];
-				String productType = lineData[3];
 				
-				
-				
-				System.out.println(slot + " " + productName + " " + price);
+				System.out.println(slot + " " + productName + "  Price: $" + price);
 			}			
 		}
+		
 	}
 }
