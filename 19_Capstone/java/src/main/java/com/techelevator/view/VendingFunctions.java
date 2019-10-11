@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.techelevator.VendingMachineCLI;
+
 public class VendingFunctions {
 
 	List<Inventory> vendingArray = new ArrayList<>();
@@ -23,7 +25,7 @@ public class VendingFunctions {
 				String name = productInfo[1];
 				BigDecimal price = new BigDecimal(productInfo[2]);
 				String type = productInfo[3];
-				if (type.equals("Ch1" + "ip")) {
+				if (type.equals("Chip")) {
 					vendingArray.add(new Chips(slot, name, price, type, 5));
 				} else if (type.equals("Candy")) {
 					vendingArray.add(new Candy(slot, name, price, type, 5));
@@ -67,23 +69,23 @@ public class VendingFunctions {
 
 		return amountToAddBack;
 	}
+	
+	public void selectProduct() {
+		
+		displayInventory();
+		System.out.println("Enter Product Code: ");
+		Scanner input = new Scanner(System.in);
+		String userInput = input.nextLine();
+		
+		for(Inventory item : vendingArray) {
+			if(userInput.equals(item.getSlot())) {
+				System.out.println(item.getName() + " " + item.getPrice());
+				System.out.println(item.getMessage());
+			}
+			else if(!(userInput.equals(item.getSlot()))) {
+				System.out.println("Invalid Selection.");
+			}
+		}
+	}
 
-	// BigDecimal balance = new BigDecimal(0.00).setScale(2);
-	// List<Product> purchaseList = new ArrayList<>();
-	// LogWriter writer = new LogWriter();
-
-	/*
-	 * public void feedMoney(int addMoney) { String typeOfTransaction =
-	 * "FEED MONEY:"; if (addMoney == 1) { balance = balance.add(new
-	 * BigDecimal(1.00)); writer.writer(typeOfTransaction, new
-	 * BigDecimal(1.00).setScale(2), balance);
-	 * 
-	 * } else if (addMoney == 2) { balance = balance.add(new BigDecimal(2.00));
-	 * writer.writer(typeOfTransaction, new BigDecimal(2.00).setScale(2), balance);
-	 * } else if (addMoney == 3) { balance = balance.add(new BigDecimal(5.00));
-	 * writer.writer(typeOfTransaction, new BigDecimal(5.00).setScale(2), balance);
-	 * } else if (addMoney == 4) { balance = balance.add(new BigDecimal(10.00));
-	 * writer.writer(typeOfTransaction, new BigDecimal(10.00).setScale(2), balance);
-	 * } System.out.println("Your balance is " + balance); }
-	 */
 }

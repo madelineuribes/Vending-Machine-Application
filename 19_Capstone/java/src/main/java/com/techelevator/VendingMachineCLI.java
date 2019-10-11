@@ -23,10 +23,20 @@ public class VendingMachineCLI {
 	private VendingFunctions vm = new VendingFunctions();
 	
 	private Menu menu;
-
+	
+//	private static BigDecimal runningBalance;
+//
+//	public VendingMachineCLI(BigDecimal runningBalance) {
+//		this.runningBalance = runningBalance;
+//	}
+	
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
+
+//	public static BigDecimal getRunningBalance() {
+//		return runningBalance;
+//	}
 
 	public void run() {
 
@@ -78,7 +88,7 @@ public class VendingMachineCLI {
 					
 					
 				} else if (choicePurchase.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-					// select product
+					vm.selectProduct();
 				} else if (choicePurchase.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 					// finish transaction
 				}
