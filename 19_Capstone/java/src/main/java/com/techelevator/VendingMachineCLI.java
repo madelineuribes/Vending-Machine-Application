@@ -2,6 +2,7 @@ package com.techelevator;
 
 import java.math.BigDecimal;
 
+import com.techelevator.view.Inventory;
 import com.techelevator.view.Menu;
 import com.techelevator.view.VendingFunctions;
 
@@ -16,32 +17,22 @@ public class VendingMachineCLI {
 	private static final String PURCHASE_MENU_OPTION_FEED_MONEY = "Feed Money";
 	private static final String PURCHASE_MENU_OPTION_SELECT_PRODUCT = "Select Product";
 	private static final String PURCHASE_MENU_OPTION_FINISH_TRANSACTION = "Finish Transaction";
-	private static final String PURCHASE_MENU_OPTION_CURRENT_MONEY = "Current Money Provided: ";
 	private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_OPTION_FEED_MONEY,
 			PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTION };
-	
+
 	private VendingFunctions vm = new VendingFunctions();
-	
+
 	private Menu menu;
-	
-//	private static BigDecimal runningBalance;
-//
-//	public VendingMachineCLI(BigDecimal runningBalance) {
-//		this.runningBalance = runningBalance;
-//	}
-	
+	BigDecimal runningBalance = new BigDecimal("0.00");
+
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
 
-//	public static BigDecimal getRunningBalance() {
-//		return runningBalance;
-//	}
-
 	public void run() {
 
 		vm.loadInventory();
-		
+
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
@@ -61,36 +52,39 @@ public class VendingMachineCLI {
 					final String FEED_MONEY_5 = "Feed 5 dollars";
 					final String FEED_MONEY_10 = "Feed 10 dollars";
 					final String FEED_MONEY_DONE = "Done";
-					final String[] FEED_MONEY_MENU_OPTIONS = { FEED_MONEY_1, FEED_MONEY_2,
-							FEED_MONEY_5, FEED_MONEY_10, FEED_MONEY_DONE};
-				
-					/*Andy Suggestion*/
+					final String[] FEED_MONEY_MENU_OPTIONS = { FEED_MONEY_1, FEED_MONEY_2, FEED_MONEY_5, FEED_MONEY_10,
+							FEED_MONEY_DONE };
+
 					boolean feedMoneyLoopContinue = true;
-					BigDecimal runningBalance = new BigDecimal("0.00");
-					
-					
+
 					while (feedMoneyLoopContinue) {
-						
+
 						String feedChoice = (String) menu.getChoiceFromOptions(FEED_MONEY_MENU_OPTIONS);
-						
+
 						if (feedChoice.equals("Done")) {
 							feedMoneyLoopContinue = false;
-						}
-						else {
-							
+						} else {
+
 							BigDecimal amountAdded = vm.feedMoney(feedChoice);
 							runningBalance = runningBalance.add(amountAdded);
 						}
 					}
-					
+
 					System.out.println("The total running balance" + runningBalance);
-					/**/
-					
-					
+
 				} else if (choicePurchase.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-					vm.selectProduct();
+					Inventory item = vm.selectProduct();
+					if (item == null || item.getQuantity() == 0) {
+						// send them back
+					} else {
+						// find out if they have enough money
+						BigDecimal remainingBalance;
+						remainingBalance = runningBalance.subtract(item.getPrice());
+						System.out.println("Remaining Balance: " + remainingBalance);
+					}
+
 				} else if (choicePurchase.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
-					// finish transaction
+					// vm.finishTransaction();
 				}
 			}
 

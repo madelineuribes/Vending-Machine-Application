@@ -70,22 +70,29 @@ public class VendingFunctions {
 		return amountToAddBack;
 	}
 	
-	public void selectProduct() {
+	public Inventory selectProduct() {
 		
 		displayInventory();
 		System.out.println("Enter Product Code: ");
 		Scanner input = new Scanner(System.in);
 		String userInput = input.nextLine();
-		
+		boolean isFound = false;
 		for(Inventory item : vendingArray) {
 			if(userInput.equals(item.getSlot())) {
-				System.out.println(item.getName() + " " + item.getPrice());
+				System.out.println(item.getName() + " | $" + item.getPrice());
 				System.out.println(item.getMessage());
-			}
-			else if(!(userInput.equals(item.getSlot()))) {
-				System.out.println("Invalid Selection.");
+				isFound = true;
+				return item;
 			}
 		}
+		if(!(isFound)) {
+			System.out.println("Invalid Selection.");
+		}
+		return null;
 	}
 
+	public void finishTransaction() {
+		
+	}
+	
 }
