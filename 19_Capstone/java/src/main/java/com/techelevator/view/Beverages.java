@@ -43,5 +43,10 @@ public class Beverages implements Inventory {
 	public int getQuantity() {
 		return quantity;
 	}
+	
+	public int decrement() {
+		quantity = quantity - 1;
+		return quantity;
+	}
 
 }

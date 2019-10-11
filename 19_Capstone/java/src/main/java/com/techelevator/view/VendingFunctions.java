@@ -81,6 +81,7 @@ public class VendingFunctions {
 			if(userInput.equals(item.getSlot())) {
 				System.out.println(item.getName() + " | $" + item.getPrice());
 				System.out.println(item.getMessage());
+				item.decrement();
 				isFound = true;
 				return item;
 			}

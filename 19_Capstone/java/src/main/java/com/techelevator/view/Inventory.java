@@ -16,4 +16,5 @@ public interface Inventory {
 	
 	public int getQuantity();
 	
+	public int decrement();
 }

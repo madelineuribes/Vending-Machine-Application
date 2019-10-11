@@ -45,4 +45,9 @@ public class Gum implements Inventory {
 		return quantity;
 	}
 	
+	public int decrement() {
+		quantity = quantity - 1;
+		return quantity;
+	}
+	
 }
