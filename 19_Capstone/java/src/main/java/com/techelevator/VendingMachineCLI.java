@@ -73,23 +73,19 @@ public class VendingMachineCLI {
 					System.out.println("The total running balance" + runningBalance);
 
 				} else if (choicePurchase.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-					Inventory item = vm.selectProduct();
-					if (item == null) {
-						String feedChoice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-					} else if(item.getQuantity() <= 0){ 
-						String feedChoice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-						System.out.println("Out Of Stock. You Broke Us.");
-					}
-						else {
-						// find out if they have enough money
-					//	BigDecimal remainingBalance;
-						runningBalance = runningBalance.subtract(item.getPrice());
-						System.out.println("Remaining Balance: " + runningBalance);
-						String feedChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
-					}
-
+						Inventory item = vm.selectProduct();
+						if (item == null) {
+							// Go back to main menu
+						} else if (item.getQuantity() <= 0) {
+							// Go back to main menu
+							System.out.println("Out Of Stock.");
+						} else {
+							// Find out if they have enough money
+								runningBalance = runningBalance.subtract(item.getPrice());
+								System.out.println("Remaining Balance: " + runningBalance);
+						}
 				} else if (choicePurchase.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
-					// vm.finishTransaction();
+					vm.finishTransaction(runningBalance);
 				}
 			}
 

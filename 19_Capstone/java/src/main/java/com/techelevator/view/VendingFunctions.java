@@ -65,35 +65,51 @@ public class VendingFunctions {
 		} else if (choice.equals("Feed 10 dollars")) {
 			amountToAddBack = new BigDecimal(10.00);
 		}
-		
 
 		return amountToAddBack;
 	}
-	
+
 	public Inventory selectProduct() {
-		
+
 		displayInventory();
 		System.out.println("Enter Product Code: ");
 		Scanner input = new Scanner(System.in);
 		String userInput = input.nextLine();
 		boolean isFound = false;
-		for(Inventory item : vendingArray) {
-			if(userInput.equals(item.getSlot())) {
+		for (Inventory item : vendingArray) {
+			if (userInput.equals(item.getSlot())) {
 				System.out.println(item.getName() + " | $" + item.getPrice());
 				System.out.println(item.getMessage());
-				item.decrement();
+				System.out.println("before: " + item.getQuantity());
+				if (!(item.getQuantity() <= 0)) {
+					item.decrement();
+				}
+
+				System.out.println(item.getQuantity());
 				isFound = true;
 				return item;
 			}
 		}
-		if(!(isFound)) {
+		if (!(isFound)) {
 			System.out.println("Invalid Selection.");
 		}
 		return null;
 	}
 
-	public void finishTransaction() {
-		
+	public void finishTransaction(BigDecimal balance) {
+		double balance1;
+		int quarters1;
+		int dime1;
+		int nickels1;
+		balance1 = (balance.doubleValue() * 100);
+		quarters1 = ((int) balance1 / 25);
+		balance1 = balance1 - (quarters1 * 25);
+		dime1 = ((int) balance1 / 10);
+		balance1 = balance1 - (dime1 * 10);
+		nickels1 = ((int) balance1 / 5);
+
+		System.out.println(
+				"Your change is " + quarters1 + " quarters and " + dime1 + " dimes and " + nickels1 + " nickels. ");
 	}
-	
+
 }
