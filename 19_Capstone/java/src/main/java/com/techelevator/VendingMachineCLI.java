@@ -70,8 +70,9 @@ public class VendingMachineCLI {
 						}
 					}
 
-					System.out.println("The total running balance" + runningBalance);
-
+					System.out.println("The total running balance: " + runningBalance);
+				
+				
 				} else if (choicePurchase.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
 						Inventory item = vm.selectProduct();
 						if (item == null) {
@@ -86,6 +87,7 @@ public class VendingMachineCLI {
 						}
 				} else if (choicePurchase.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 					vm.finishTransaction(runningBalance);
+					runningBalance = BigDecimal.ZERO;
 				}
 			}
 

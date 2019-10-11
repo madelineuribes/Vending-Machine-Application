@@ -8,7 +8,7 @@ public class Change {
 	private int dime1;
 	private int nickels1;
 
-	public void giveChange(BigDecimal balance) {
+	public BigDecimal giveChange(BigDecimal balance) {
 
 		balance1 = (balance.doubleValue() * 100);
 		quarters1 = ((int) balance1 / 25);
@@ -19,5 +19,6 @@ public class Change {
 
 		System.out.println(
 				"Your change is " + quarters1 + " quarters and " + dime1 + " dimes and " + nickels1 + " nickels. ");
+		return balance = BigDecimal.ZERO;
 	}
 }
