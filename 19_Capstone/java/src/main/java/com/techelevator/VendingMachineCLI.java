@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import java.math.BigDecimal;
+
 import com.techelevator.view.Menu;
 import com.techelevator.view.VendingFunctions;
 
@@ -44,7 +46,7 @@ public class VendingMachineCLI {
 
 				if (choicePurchase.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 					System.out.println("Feed Money");
-					final String FEED_MONEY_1 = "Feed 1 dollar";
+					final String FEED_MONEY_1 = "Feed 1 dollars";
 					final String FEED_MONEY_2 = "Feed 2 dollars";
 					final String FEED_MONEY_5 = "Feed 5 dollars";
 					final String FEED_MONEY_10 = "Feed 10 dollars";
@@ -52,8 +54,28 @@ public class VendingMachineCLI {
 					final String[] FEED_MONEY_MENU_OPTIONS = { FEED_MONEY_1, FEED_MONEY_2,
 							FEED_MONEY_5, FEED_MONEY_10, FEED_MONEY_DONE};
 				
-					String feedChoice = (String) menu.getChoiceFromOptions(FEED_MONEY_MENU_OPTIONS);
-					vm.feedMoney(feedChoice);
+					/*Andy Suggestion*/
+					boolean feedMoneyLoopContinue = true;
+					BigDecimal runningBalance = new BigDecimal("0.00");
+					
+					
+					while (feedMoneyLoopContinue) {
+						
+						String feedChoice = (String) menu.getChoiceFromOptions(FEED_MONEY_MENU_OPTIONS);
+						
+						if (feedChoice.equals("Done")) {
+							feedMoneyLoopContinue = false;
+						}
+						else {
+							
+							BigDecimal amountAdded = vm.feedMoney(feedChoice);
+							runningBalance = runningBalance.add(amountAdded);
+						}
+					}
+					
+					System.out.println("The total running balance" + runningBalance);
+					/**/
+					
 					
 				} else if (choicePurchase.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
 					// select product
