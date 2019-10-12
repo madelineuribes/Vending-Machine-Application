@@ -99,14 +99,14 @@ public class VendingFunctions {
 						System.out.println("Enter More Money.");
 					}
 					isFound = true;
-					return balance;
+					
 				}
 			}
 		}
 		if (!(isFound)) {
 			System.out.println("Invalid Selection.");
 		}
-		return null;
+		return balance;
 	}
 
 	public BigDecimal subtractBalance (Inventory item, BigDecimal balance) {
