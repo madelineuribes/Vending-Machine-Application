@@ -12,6 +12,7 @@ import com.techelevator.VendingMachineCLI;
 public class VendingFunctions {
 
 	List<Inventory> vendingArray = new ArrayList<>();
+	AuditEntry writer = new AuditEntry();
 
 	public void loadInventory() {
 		// read in the file
@@ -52,48 +53,67 @@ public class VendingFunctions {
 		}
 	}
 
-	public BigDecimal feedMoney(String choice) {
+	public BigDecimal feedMoney(String choice, BigDecimal runningBalance) {
 		BigDecimal amountToAddBack = new BigDecimal(0);
+		String typeOfTransaction = "FEED MONEY:";
 
 		if (choice.equals("Feed 1 dollars")) {
-
 			amountToAddBack = new BigDecimal(1.00);
+			writer.writer(typeOfTransaction, new BigDecimal(1.00).setScale(2), runningBalance.add(amountToAddBack) );
 		} else if (choice.equals("Feed 2 dollars")) {
 			amountToAddBack = new BigDecimal(2.00);
+			writer.writer(typeOfTransaction, new BigDecimal(2.00).setScale(2), runningBalance.add(amountToAddBack));
 		} else if (choice.equals("Feed 5 dollars")) {
 			amountToAddBack = new BigDecimal(5.00);
+			writer.writer(typeOfTransaction, new BigDecimal(5.00).setScale(2), runningBalance.add(amountToAddBack));
 		} else if (choice.equals("Feed 10 dollars")) {
 			amountToAddBack = new BigDecimal(10.00);
+			writer.writer(typeOfTransaction, new BigDecimal(10.00).setScale(2), runningBalance.add(amountToAddBack));
 		}
 
 		return amountToAddBack;
 	}
 
-	public Inventory selectProduct() {
-
-		displayInventory();
-		System.out.println("Enter Product Code: ");
-		Scanner input = new Scanner(System.in);
-		String userInput = input.nextLine();
+	public BigDecimal selectProduct(String userInput, BigDecimal balance) {
 		boolean isFound = false;
+
 		for (Inventory item : vendingArray) {
 			if (userInput.equals(item.getSlot())) {
-				System.out.println(item.getName() + " | $" + item.getPrice());
-				System.out.println(item.getMessage());
-				System.out.println("before: " + item.getQuantity());
-				if (!(item.getQuantity() <= 0)) {
-					item.decrement();
+				if (item.getQuantity() <= 0) {
+					System.out.println("Out of Stock.");
 				}
+				if (!(item.getQuantity() <= 0)) {
+					if (balance.compareTo(item.getPrice()) == 1) {
 
-				System.out.println(item.getQuantity());
-				isFound = true;
-				return item;
+						item.decrement();
+						
+						balance = balance.subtract(item.getPrice());
+						System.out.println("Remaining Balance: " + balance);
+						
+						System.out.println(item.getName() + " | $" + item.getPrice());
+						System.out.println(item.getMessage());
+	
+						writer.writer(item.getName(), item.getPrice(), balance);
+
+					} else {
+						System.out.println("Enter More Money.");
+					}
+					isFound = true;
+					return balance;
+				}
 			}
 		}
 		if (!(isFound)) {
 			System.out.println("Invalid Selection.");
 		}
 		return null;
+	}
+
+	public BigDecimal subtractBalance (Inventory item, BigDecimal balance) {
+
+		balance = balance.subtract(item.getPrice());
+		System.out.println("Remaining Balance: " + balance);
+		return balance;
 	}
 
 	public void finishTransaction(BigDecimal balance) {
@@ -108,8 +128,10 @@ public class VendingFunctions {
 		balance1 = balance1 - (dime1 * 10);
 		nickels1 = ((int) balance1 / 5);
 
+		writer.writer("GIVE CHANGE:", balance, new BigDecimal(0.00).setScale(2));
+
 		System.out.println(
-				"Your change is " + quarters1 + " quarters and " + dime1 + " dimes and " + nickels1 + " nickels. ");
+				"Your change is " + quarters1 + " quarters, " + dime1 + " dimes and " + nickels1 + " nickels. ");
 	}
 
 }

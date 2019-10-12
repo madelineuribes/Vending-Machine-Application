@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import java.math.BigDecimal;
+import java.util.Scanner;
 
 import com.techelevator.view.Inventory;
 import com.techelevator.view.Menu;
@@ -65,26 +66,20 @@ public class VendingMachineCLI {
 							feedMoneyLoopContinue = false;
 						} else {
 
-							BigDecimal amountAdded = vm.feedMoney(feedChoice);
+							BigDecimal amountAdded = vm.feedMoney(feedChoice, runningBalance);
 							runningBalance = runningBalance.add(amountAdded);
 						}
 					}
 
 					System.out.println("The total running balance: " + runningBalance);
-				
-				
+
 				} else if (choicePurchase.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-						Inventory item = vm.selectProduct();
-						if (item == null) {
-							// Go back to main menu
-						} else if (item.getQuantity() <= 0) {
-							// Go back to main menu
-							System.out.println("Out Of Stock.");
-						} else {
-							// Find out if they have enough money
-								runningBalance = runningBalance.subtract(item.getPrice());
-								System.out.println("Remaining Balance: " + runningBalance);
-						}
+					vm.displayInventory();
+					System.out.println("Enter Product: ");
+					Scanner input = new Scanner(System.in);
+					String userInput = input.nextLine();
+					runningBalance = vm.selectProduct(userInput, runningBalance);
+					
 				} else if (choicePurchase.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 					vm.finishTransaction(runningBalance);
 					runningBalance = BigDecimal.ZERO;
