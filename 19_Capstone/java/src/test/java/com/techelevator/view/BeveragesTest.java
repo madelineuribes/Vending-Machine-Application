@@ -11,12 +11,21 @@ public class BeveragesTest {
 	
 	// Test getMessage method
 	Beverages bevTestMessage = new Beverages("C1", "Cola", new BigDecimal("1.25"), "Drink", 5);
+	Chips chipsTestMessage = new Chips("A2", "Stackers", new BigDecimal("1.45"), "Chips", 5);
 	
 	@Test
 	public void productIsBeverageGetMessage() {
 		Assert.assertEquals("Glug Glug, Yum!", bevTestMessage.getMessage());
 	}
 	
+	@Test
+	public void productIsChipsGetMessageShouldNotBeGlug() {
+		boolean expectedResult = true;
+		if (!(bevTestMessage.getMessage() == "Glug Glug, Yum!")) {
+			expectedResult = false;
+			Assert.assertEquals(expectedResult, chipsTestMessage.getMessage());
+		}
+	}
 	
 	// Test decrement method
 	Beverages bevTestQuantity5 = new Beverages("C1", "Cola", new BigDecimal("1.25"), "Drink", 5);
