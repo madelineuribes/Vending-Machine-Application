@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.techelevator.VendingMachineCLI;
+
 
 public class VendingFunctions {
 
@@ -42,7 +42,6 @@ public class VendingFunctions {
 	}
 
 	public void displayInventory() {
-
 		for (Inventory item : vendingArray) {
 			System.out.println(item.getSlot() + " " + item.getName() + " $" + item.getPrice() + " Quantity: " + ""
 					+ item.getQuantity());
@@ -70,7 +69,6 @@ public class VendingFunctions {
 			amountToAddBack = new BigDecimal(10.00);
 			writer.writer(typeOfTransaction, new BigDecimal(10.00).setScale(2), runningBalance.add(amountToAddBack));
 		}
-
 		return amountToAddBack;
 	}
 
@@ -99,14 +97,14 @@ public class VendingFunctions {
 						System.out.println("Enter More Money.");
 					}
 					isFound = true;
-					
+					return balance;
 				}
 			}
 		}
 		if (!(isFound)) {
 			System.out.println("Invalid Selection.");
 		}
-		return balance;
+		return null;
 	}
 
 	public BigDecimal subtractBalance (Inventory item, BigDecimal balance) {

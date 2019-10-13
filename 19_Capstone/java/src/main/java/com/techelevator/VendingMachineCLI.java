@@ -3,7 +3,6 @@ package com.techelevator;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-import com.techelevator.view.Inventory;
 import com.techelevator.view.Menu;
 import com.techelevator.view.VendingFunctions;
 
@@ -81,6 +80,7 @@ public class VendingMachineCLI {
 					runningBalance = vm.selectProduct(userInput, runningBalance);
 					
 				} else if (choicePurchase.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+					
 					vm.finishTransaction(runningBalance);
 					runningBalance = BigDecimal.ZERO;
 				}
