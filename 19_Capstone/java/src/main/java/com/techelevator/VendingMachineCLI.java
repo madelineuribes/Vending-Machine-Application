@@ -64,7 +64,6 @@ public class VendingMachineCLI {
 						if (feedChoice.equals("Done")) {
 							feedMoneyLoopContinue = false;
 						} else {
-
 							BigDecimal amountAdded = vm.feedMoney(feedChoice, runningBalance);
 							runningBalance = runningBalance.add(amountAdded);
 						}
