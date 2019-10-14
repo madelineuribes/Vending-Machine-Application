@@ -47,7 +47,15 @@ public class VendingFunctionsTest {
 	
 	
 	// Test selectProduct method in VendingFunctions
-
+	@Test
+	public void testSelectProductBalanceTenReturnNull() {
+		Assert.assertEquals(null, vendingFunctionsTest.selectProduct("A1", BigDecimal.TEN));
+	}
+	
+	@Test
+	public void testSelectProductBalanceZeroReturnNull() {
+		Assert.assertEquals(null, vendingFunctionsTest.selectProduct("B3", BigDecimal.ZERO));
+	}
 	
 	
 	// Test testSubtract method 
